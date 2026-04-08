@@ -8,28 +8,27 @@ import function.TimeSlot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Patient {
-    private String patientID;
-    private String name;
-    
+public class Patient extends User {
+	
     private boolean hasConsultation;
     private String notification; //*notification should be same with name of departments 
     							 //-> read Patientcontroller class's handleBookButton method for detail
     private List<Appointment> appointments; //List of appointment of such patient
     //Probably should be implemented with queue, but I suppose order doesn't matter
 
-    public Patient(String patientID, String name) { //Constructor for patient
-        this.patientID = patientID;
-        this.name = name;
+    public Patient(String id, String name) { //Constructor for patient
+        super(id, name);
         this.hasConsultation = false;
         this.notification = "";
         this.appointments = new ArrayList<>();
     }
     
-    public String getPatientID(){ 
-    	return patientID; 
+    @Override
+    public String getID(){ 
+    	return id; 
     }
     
+    @Override
     public String getName(){ 
     	return name; 
     }
@@ -58,7 +57,7 @@ public class Patient {
     	
         if (!hasConsultation) throw new IllegalStateException("No Doctor's referral found. Cannot book this time."); 
         //If patient doesn't have consultation, throw exception
-        appointments.add(new Appointment(patientID, dept, slot.getTime(), AppointmentStatus.CONFIRMED));
+        appointments.add(new Appointment(id, dept, slot.getTime(), AppointmentStatus.CONFIRMED));
         //Add to appointment list 
         slot.setAvailable(false);
         //Make time slot not available
@@ -66,6 +65,6 @@ public class Patient {
     
     @Override
     public String toString() { 
-    	return name + ": [" + patientID + "]"; 
+    	return name + ": [" + id + "]"; 
     }
 }
