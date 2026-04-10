@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #2f3f50; -fx-padding: 20;" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="28.0" prefWidth="219.0" style="-fx-font-size: 22; -fx-font-weight: bold;" text="[Doctor Name]" textFill="WHITE" />
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefHeight="325.0" prefWidth="197.0" style="-fx-padding: 10;" BorderPane.alignment="CENTER">
+         <children>
+            <Label style="-fx-font-size: 15;" text="Patient List" />
+            <ListView prefHeight="290.0" prefWidth="197.0" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Consultation">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <HBox prefHeight="23.0" prefWidth="403.0" style="-fx-padding: 10;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Begin Consultation" />
+                              <Label prefHeight="26.0" prefWidth="215.0" style="-fx-font-size: 14; -fx-label-padding: 4;" text="Patient: None">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </top>
+                     <center>
+                        <VBox prefHeight="294.0" prefWidth="198.0" style="-fx-padding: 10;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Notes" />
+                              <TextArea disable="true" prefHeight="260.0" prefWidth="178.0" />
+                           </children>
+                        </VBox>
+                     </center></BorderPane>
+               </content>
+          </Tab>
+          <Tab disable="true" text="Wrap Up">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <VBox prefHeight="183.0" prefWidth="175.0" style="-fx-padding: 15; -fx-spacing: 10;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label prefHeight="27.0" prefWidth="187.0" text="Patient: None" />
+                              <Group>
+                                 <children>
+                                    <Label text="Scheduling Priority:" />
+                                    <MenuButton layoutY="22.0" mnemonicParsing="false" text="Select">
+                                      <items>
+                                        <MenuItem mnemonicParsing="false" text="Regular" />
+                                        <MenuItem mnemonicParsing="false" text="Emergency" />
+                                      </items>
+                                    </MenuButton>
+                                 </children>
+                              </Group>
+                              <Group>
+                                 <children>
+                                    <Label text="Test Required:" />
+                                    <MenuButton layoutY="22.0" mnemonicParsing="false" text="Select">
+                                       <items>
+                                          <MenuItem mnemonicParsing="false" text="True" />
+                                          <MenuItem mnemonicParsing="false" text="False" />
+                                       </items>
+                                    </MenuButton>
+                                 </children>
+                              </Group>
+                           </children>
+                        </VBox>
+                     </left>
+                     <bottom>
+                        <HBox prefHeight="92.0" prefWidth="403.0" style="-fx-padding: 15;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Group>
+                                 <children>
+                                    <Label text="Tests:" />
+                                    <ToggleButton layoutY="22.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="ULTRASOUND" />
+                                    <ToggleButton layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="MRI" />
+                                    <ToggleButton layoutX="115.0" layoutY="22.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="CT SCAN" />
+                                    <ToggleButton layoutX="115.0" layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="X-RAY" />
+                                    <ToggleButton layoutX="231.0" layoutY="22.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="LAB" />
+                                 </children>
+                              </Group>
+                           </children>
+                        </HBox>
+                     </bottom>
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-padding: 15; -fx-spacing: 10;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Follow Up Instructions:" />
+                              <TextArea prefHeight="148.0" prefWidth="221.0" />
+                           </children>
+                        </VBox>
+                     </center></BorderPane>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

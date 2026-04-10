@@ -1,0 +1,5 @@
+package function;
+
+public enum SubDepartment {
+	NEUROLOGY, ORTHOPEDICS, UROLOGY, CARDIOLOGY, OTOLARYNGOLOGY;
+}
