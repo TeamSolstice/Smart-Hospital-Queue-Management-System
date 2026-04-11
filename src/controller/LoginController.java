@@ -86,6 +86,8 @@ public class LoginController {
     }
 
     private Stage getStage() {
+        if (patientIdField != null && patientIdField.getScene() != null)
+            return (Stage) patientIdField.getScene().getWindow();
         return (Stage) idField.getScene().getWindow();
     }
 }
