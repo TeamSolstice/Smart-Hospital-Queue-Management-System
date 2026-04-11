@@ -98,13 +98,13 @@ public class DoctorController {
     @FXML
     public void initialize() {
         if (priorityCombo != null) {
-            priorityCombo.getItems().setAll(Priority.EMERGENCY.name(), Priority.REGULAR.name());
-            priorityCombo.setValue(Priority.REGULAR.name());
+            priorityCombo.getItems().setAll("Regular", "Emergency");
+            priorityCombo.setValue("Regular");
         }
 
         if (testRequiredCombo != null) {
-            testRequiredCombo.getItems().setAll("YES", "NO");
-            testRequiredCombo.setValue("NO");
+            testRequiredCombo.getItems().setAll("True", "False");
+            testRequiredCombo.setValue("False");
             testRequiredCombo.valueProperty().addListener((obs, oldValue, newValue) -> updateTestControls());
         }
 
@@ -179,11 +179,11 @@ public class DoctorController {
         }
 
         if (priorityCombo != null && priorityCombo.getValue() == null) {
-            priorityCombo.setValue(Priority.REGULAR.name());
+            priorityCombo.setValue("Regular");
         }
 
         if (testRequiredCombo != null && testRequiredCombo.getValue() == null) {
-            testRequiredCombo.setValue("NO");
+            testRequiredCombo.setValue("False");
         }
 
         updateTestControls();
@@ -191,7 +191,7 @@ public class DoctorController {
     }
 
     // Link this to the "Test Required" combo box onAction.
-    // Enables or disables the scan toggle buttons based on YES / NO.
+    // Enables or disables the scan toggle buttons based on True / False.
     @FXML
     private void handleTestRequirementChange() {
         updateTestControls();
@@ -223,11 +223,11 @@ public class DoctorController {
 
         Priority priority = Priority.REGULAR;
         if (priorityCombo != null && priorityCombo.getValue() != null) {
-            priority = Priority.valueOf(priorityCombo.getValue());
+            priority = parsePriority(priorityCombo.getValue());
         }
 
         boolean testRequired = testRequiredCombo != null
-            && "YES".equalsIgnoreCase(testRequiredCombo.getValue());
+            && Boolean.parseBoolean(testRequiredCombo.getValue());
 
         List<ScanType> selectedScans = getSelectedScans();
         if (testRequired && selectedScans.isEmpty()) {
@@ -316,11 +316,11 @@ public class DoctorController {
     }
 
     // Enables the scan ToggleButtons only when consultation is active
-    // and the "Test Required" combo box is set to YES.
+    // and the "Test Required" combo box is set to True.
     private void updateTestControls() {
         boolean consultationEnabled = chiefComplaintArea != null && !chiefComplaintArea.isDisable();
         boolean testRequired = testRequiredCombo != null
-            && "YES".equalsIgnoreCase(testRequiredCombo.getValue());
+            && Boolean.parseBoolean(testRequiredCombo.getValue());
         boolean enableButtons = consultationEnabled && testRequired;
 
         setToggleState(ultrasoundToggle, enableButtons);
@@ -399,10 +399,10 @@ public class DoctorController {
         clearInput(followUpInstructionsArea);
 
         if (priorityCombo != null) {
-            priorityCombo.setValue(Priority.REGULAR.name());
+            priorityCombo.setValue("Regular");
         }
         if (testRequiredCombo != null) {
-            testRequiredCombo.setValue("NO");
+            testRequiredCombo.setValue("False");
         }
 
         updateSelectedPatientLabels(null);
@@ -460,6 +460,17 @@ public class DoctorController {
             return scanSummary;
         }
         return scanSummary + " | Follow-up: " + followUp;
+    }
+
+    // Maps the user-facing priority combo box values to the Priority enum.
+    private Priority parsePriority(String priorityValue) {
+        if (priorityValue == null) {
+            return Priority.REGULAR;
+        }
+        if ("Emergency".equalsIgnoreCase(priorityValue)) {
+            return Priority.EMERGENCY;
+        }
+        return Priority.REGULAR;
     }
 
     // Writes validation / result messages into the status label.
