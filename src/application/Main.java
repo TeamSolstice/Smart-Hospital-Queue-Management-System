@@ -52,6 +52,10 @@ public class Main extends Application {
         
         patientMap.put("P001", new Patient("P001", "John Doe",  "john1234"));
         patientMap.put("P002", new Patient("P002", "Jane Doe",  "jane1234"));
+        patientMap.put("P003", new Patient("P003", "Bruno Mars",  "bruno1234"));
+        patientMap.put("P004", new Patient("P004", "Iron Man",  "iron1234"));
+        patientMap.put("P005", new Patient("P005", "Thor Odinson",  "thor1234"));
+        patientMap.put("P006", new Patient("P006", "Boris Mason",  "boris1234"));
 
         // After Person 2 done,
         // authMap.put("D123", new Doctor("D123", "Dr. Yu", "abcde12345", SubDepartment.RADIOLOGY));
