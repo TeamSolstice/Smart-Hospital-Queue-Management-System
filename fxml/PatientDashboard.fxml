@@ -3,26 +3,60 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane style="-fx-background-color: #f0f4f8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="controller.PatientController">
+<BorderPane style="-fx-background-color: #f0f4f8;" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/25" fx:controller="controller.PatientController">
     <top>
         <VBox style="-fx-padding: 20; -fx-background-color: #2f3f50;">
-            <Label fx:id="welcomeLabel" style="-fx-font-size: 22px; -fx-text-fill: white; -fx-font-weight: bold;" text="Welcome, " />
+            <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+                <Button text="← Logout" onAction="#handleBack"
+                        style="-fx-font-size: 12px; -fx-padding: 6 14; -fx-cursor: hand;"/>
+                <Button text="⟳ Refresh" onAction="#handleRefresh"
+                        style="-fx-font-size: 12px; -fx-padding: 6 14; -fx-cursor: hand;"/>
+            </HBox>
+            <Label fx:id="welcomeLabel"
+                   style="-fx-font-size: 22px; -fx-text-fill: white; -fx-font-weight: bold;"
+                   text="Welcome, " />
         </VBox>
     </top>
     <center>
         <VBox spacing="10" style="-fx-padding: 20;">
-            <Label style="-fx-font-size: 15px; -fx-font-weight: bold;" text="Departments &amp; Estimated Time" />
-            <ListView fx:id="departmentListView" prefHeight="320" style="-fx-font-size: 13px;" />
+            <Label style="-fx-font-size: 15px; -fx-font-weight: bold;"
+                   text="Departments &amp; Estimated Time" />
+            <ListView fx:id="departmentListView" prefHeight="180" style="-fx-font-size: 13px;" />
+
+            <Separator />
+
+            <Label style="-fx-font-size: 15px; -fx-font-weight: bold;" text="My Appointments" />
+            <ListView fx:id="appointmentListView" prefHeight="150" style="-fx-font-size: 13px;" />
+            <HBox spacing="10">
+                <Button text="✓ Mark Completed" onAction="#handleMarkCompleted"
+                        style="-fx-background-color: #2980b9; -fx-text-fill: white;
+                               -fx-font-size: 12px; -fx-padding: 6 14; -fx-cursor: hand;"/>
+                <Button text="✕ Cancel Appointment" onAction="#handleCancelAppointment"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white;
+                               -fx-font-size: 12px; -fx-padding: 6 14; -fx-cursor: hand;"/>
+            </HBox>
+            <Label fx:id="appointmentStatusLabel"
+                   style="-fx-text-fill: #27ae60; -fx-font-size: 12px;" text="" />
         </VBox>
     </center>
     <bottom>
-        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20; -fx-background-color: #ebeeef;">
-            <Label style="-fx-font-weight: bold; -fx-text-fill: #333;" text="Notification from your Doctor:" />
-            <Label fx:id="notificationLabel" style="-fx-text-fill: #555; -fx-wrap-text: true;" text="No notifications for now." />
-            <Button fx:id="bookButton" alignment="CENTER" contentDisplay="CENTER" onAction="#handleBookButton" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 18; -fx-cursor: hand;" text="Book Appointment" />
+        <VBox alignment="CENTER" spacing="10"
+              style="-fx-padding: 20; -fx-background-color: #ebeeef;">
+            <Label style="-fx-font-weight: bold; -fx-text-fill: #333;"
+                   text="Notification from your Doctor:" />
+            <Label fx:id="notificationLabel"
+                   style="-fx-text-fill: #555; -fx-wrap-text: true;"
+                   text="No notifications for now." />
+            <Button fx:id="bookButton" onAction="#handleBookButton"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                           -fx-font-size: 13px; -fx-padding: 8 18; -fx-cursor: hand;"
+                    text="Book Appointment" />
         </VBox>
     </bottom>
 </BorderPane>
