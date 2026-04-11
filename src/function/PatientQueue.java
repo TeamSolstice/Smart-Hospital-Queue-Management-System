@@ -1,5 +1,6 @@
 package function;
 
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
 public class PatientQueue {
@@ -16,5 +17,9 @@ public class PatientQueue {
 	
 	public PatientEnqueued dequeue() {
 		return queue.poll();
+	}
+	
+	public Iterator<PatientEnqueued> getIterator() {
+		return queue.iterator();
 	}
 }

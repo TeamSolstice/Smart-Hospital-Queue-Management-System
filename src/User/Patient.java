@@ -61,7 +61,7 @@ public class Patient extends User {
         //Add to appointment list 
         slot.setAvailable(false);
         //Make time slot not available
-    }    
+    }   
     
     @Override
     public String toString() { 

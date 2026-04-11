@@ -2,7 +2,11 @@ package application;
 
 import User.Staff;
 import User.Patient;
-
+import User.Doctor;
+import User.FrontDesk;
+import function.PatientQueue;
+import function.SubDepartment;
+import function.ConsultationRecord;
 import function.Department;
 import function.TimeSlot;
 
@@ -19,7 +23,8 @@ public class Main extends Application {
     public static List    <Department>      departments = new ArrayList<>(); //List of Department
     public static HashMap <String, Staff>   authMap     = new HashMap<>();   //Map for Staff Auth
     public static HashMap <String, Patient> patientMap  = new HashMap<>();   //Map for patient login, no auth required 
-
+    public static PatientQueue              scanQueue           = new PatientQueue();
+    public static List<ConsultationRecord>  consultationRecords = new ArrayList<>();
     @Override
     public void start(Stage primaryStage) throws Exception {
         demo();
@@ -41,10 +46,12 @@ public class Main extends Application {
         patientMap.put("P002", new Patient("P002", "Jane Doe"));
 
         // After Person 2 done,
-        // authMap.put("D123", new Doctor("D123", "Dr. Yu", "abcde12345", "Radiology"));
+        // authMap.put("D123", new Doctor("D123", "Dr. Yu", "abcde12345", SubDepartment.RADIOLOGY));
 
         //After Person 3 done,
         // authMap.put("F123", new FrontDesk("F123", "David Robinson", "qwer1234"));
+        authMap.put("D123", new Doctor("D123", "Dr. Yu", "abcde12345", SubDepartment.RADIOLOGY));
+        authMap.put("F123", new FrontDesk("F123", "David Robinson", "qwer1234"));
     }
 
     public static void main(String[] args) { 

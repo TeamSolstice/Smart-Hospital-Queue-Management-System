@@ -3,31 +3,37 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="678.0" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: #2f3f50; -fx-padding: 20;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="75.0" prefWidth="607.0" style="-fx-background-color: #2f3f50; -fx-padding: 20;" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="28.0" prefWidth="219.0" style="-fx-font-size: 22; -fx-font-weight: bold;" text="[Doctor Name]" textFill="WHITE" />
          </children>
       </HBox>
    </top>
    <left>
-      <VBox prefHeight="325.0" prefWidth="197.0" style="-fx-padding: 10;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="325.0" prefWidth="197.0" style="-fx-padding: 10; -fx-spacing: 10;" BorderPane.alignment="CENTER">
          <children>
-            <Label style="-fx-font-size: 15;" text="Patient List" />
-            <ListView prefHeight="290.0" prefWidth="197.0" />
+            <Label style="-fx-font-size: 15;" text="Patient List:" />
+            <ListView prefHeight="248.0" prefWidth="177.0" />
+            <Label prefHeight="25.0" prefWidth="177.0" style="-fx-font-size: 14;" text="Selected Patient: None">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Begin Consultation" />
          </children>
       </VBox>
    </left>
@@ -37,26 +43,32 @@
           <Tab text="Consultation">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <top>
-                        <HBox prefHeight="23.0" prefWidth="403.0" style="-fx-padding: 10;" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="120.0" text="Begin Consultation" />
-                              <Label prefHeight="26.0" prefWidth="215.0" style="-fx-font-size: 14; -fx-label-padding: 4;" text="Patient: None">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </top>
                      <center>
-                        <VBox prefHeight="294.0" prefWidth="198.0" style="-fx-padding: 10;" BorderPane.alignment="CENTER">
+                        <VBox prefHeight="345.0" prefWidth="188.0" style="-fx-padding: 10; -fx-spacing: 15;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label text="Notes" />
-                              <TextArea disable="true" prefHeight="260.0" prefWidth="178.0" />
+                              <Group>
+                                 <children>
+                                    <Label layoutX="-43.0" layoutY="20.0" text="Chief Complaint:" />
+                                    <TextArea disable="true" layoutX="-45.0" layoutY="42.0" prefHeight="90.0" prefWidth="200.0" />
+                                 </children>
+                              </Group>
+                              <Group>
+                                 <children>
+                                    <Label layoutX="-67.0" layoutY="29.0" text="Diagnosis:" />
+                                    <TextField disable="true" layoutX="-67.0" layoutY="48.0" />
+                                 </children>
+                              </Group>
                            </children>
                         </VBox>
-                     </center></BorderPane>
+                     </center>
+                     <left>
+                        <VBox prefHeight="345.0" prefWidth="256.0" style="-fx-padding: 10; -fx-spacing: 5;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Notes" />
+                              <TextArea disable="true" prefHeight="288.0" prefWidth="236.0" />
+                           </children>
+                        </VBox>
+                     </left></BorderPane>
                </content>
           </Tab>
           <Tab disable="true" text="Wrap Up">
@@ -68,40 +80,31 @@
                               <Label prefHeight="27.0" prefWidth="187.0" text="Patient: None" />
                               <Group>
                                  <children>
-                                    <Label text="Scheduling Priority:" />
-                                    <MenuButton layoutY="22.0" mnemonicParsing="false" text="Select">
-                                      <items>
-                                        <MenuItem mnemonicParsing="false" text="Regular" />
-                                        <MenuItem mnemonicParsing="false" text="Emergency" />
-                                      </items>
-                                    </MenuButton>
+                                    <Label layoutX="-23.0" layoutY="6.0" text="Scheduling Priority:" />
+                                    <ComboBox layoutX="-23.0" layoutY="28.0" prefWidth="150.0" promptText="Priority" />
                                  </children>
                               </Group>
                               <Group>
                                  <children>
-                                    <Label text="Test Required:" />
-                                    <MenuButton layoutY="22.0" mnemonicParsing="false" text="Select">
-                                       <items>
-                                          <MenuItem mnemonicParsing="false" text="True" />
-                                          <MenuItem mnemonicParsing="false" text="False" />
-                                       </items>
-                                    </MenuButton>
+                                    <Label layoutX="-23.0" layoutY="6.0" text="Test Required:" />
+                                    <ComboBox layoutX="-23.0" layoutY="28.0" prefWidth="150.0" promptText="Requirement" />
                                  </children>
                               </Group>
                            </children>
                         </VBox>
                      </left>
                      <bottom>
-                        <HBox prefHeight="92.0" prefWidth="403.0" style="-fx-padding: 15;" BorderPane.alignment="CENTER">
+                        <HBox prefHeight="110.0" prefWidth="481.0" style="-fx-padding: 15;" BorderPane.alignment="CENTER">
                            <children>
                               <Group>
                                  <children>
-                                    <Label text="Tests:" />
-                                    <ToggleButton layoutY="22.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="ULTRASOUND" />
-                                    <ToggleButton layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="MRI" />
-                                    <ToggleButton layoutX="115.0" layoutY="22.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="CT SCAN" />
-                                    <ToggleButton layoutX="115.0" layoutY="54.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="X-RAY" />
-                                    <ToggleButton layoutX="231.0" layoutY="22.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="LAB" />
+                                    <Label layoutX="-9.0" layoutY="-3.0" text="Tests:" />
+                                    <ToggleButton layoutX="-6.0" layoutY="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="MRI" />
+                                    <ToggleButton layoutX="112.0" layoutY="16.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="CT SCAN" />
+                                    <ToggleButton layoutX="-6.0" layoutY="81.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="X-RAY" />
+                                    <ToggleButton layoutX="113.0" layoutY="48.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="LAB" />
+                                    <ToggleButton layoutX="-6.0" layoutY="16.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="ULTRASOUND" />
+                                    <Button layoutX="322.0" layoutY="99.0" mnemonicParsing="false" text="Send to Front Desk" />
                                  </children>
                               </Group>
                            </children>
