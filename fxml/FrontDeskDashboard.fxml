@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.FrontDeskController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <VBox spacing="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"
+          AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="← Logout" onAction="#handleBack"
+                    style="-fx-font-size: 12px; -fx-padding: 6 14; -fx-cursor: hand;"/>
+            <Label text="Front Desk Dashboard"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        </HBox>
+
+        <Label fx:id="staffNameLabel" text="Staff Name"/>
+
+        <Separator/>
+
+        <Label text="Incoming Scan Requests (Priority Order):"/>
+        <ListView fx:id="requestListView" prefHeight="200"/>
+
+        <HBox spacing="10">
+            <Button text="Book Appointment" onAction="#handleBookAppointment"/>
+            <Button text="Notify Patient"   onAction="#handleNotifyPatient"/>
+            <Button text="⟳ Refresh"        onAction="#handleRefresh"/>
+        </HBox>
+
+        <Separator/>
+
+        <Label text="Departments and Wait Times:"/>
+        <ListView fx:id="departmentListView" prefHeight="150"/>
+
+        <Label fx:id="statusLabel" text="" style="-fx-text-fill: green;"/>
+
+    </VBox>
+</AnchorPane>
