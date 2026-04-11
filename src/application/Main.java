@@ -46,10 +46,17 @@ public class Main extends Application {
     private void demo() {  
     	//Adding Departments user accounts for demo
     	
-        departments.add(new Department("Dept_1", "A", 30, Arrays.asList(new TimeSlot("12:00 AM"), new TimeSlot("12:30 AM"), new TimeSlot("1:00 PM"))));
-        departments.add(new Department("Dept_2", "B", 20, Arrays.asList(new TimeSlot("13:00 AM"), new TimeSlot("3:00 PM"))));
-        departments.add(new Department("Dept_3", "C", 40,  Arrays.asList(new TimeSlot("11:30 AM"), new TimeSlot("2:00 PM"))));
-        
+    	departments.add(new Department("ULTRASOUND", "City General Hospital", 35,
+    	        Arrays.asList(new TimeSlot("10:00 AM"), new TimeSlot("2:30 PM"))));
+    	departments.add(new Department("MRI", "Northside Medical Center", 20,
+    	        Arrays.asList(new TimeSlot("11:00 AM"), new TimeSlot("3:00 PM"))));
+    	departments.add(new Department("LAB_TEST", "Downtown Clinic", 25,
+    	        Arrays.asList(new TimeSlot("8:30 AM"), new TimeSlot("11:30 AM"))));
+    	departments.add(new Department("CT_SCAN", "Northside Medical Center", 15,
+    	        Arrays.asList(new TimeSlot("11:00 AM"), new TimeSlot("4:00 PM"))));
+    	departments.add(new Department("X_RAY", "Downtown Clinic", 10,
+    	        Arrays.asList(new TimeSlot("8:00 AM"), new TimeSlot("12:00 PM"), new TimeSlot("3:00 PM"))));
+    	
         patientMap.put("P001", new Patient("P001", "John Doe",  "john1234"));
         patientMap.put("P002", new Patient("P002", "Jane Doe",  "jane1234"));
         patientMap.put("P003", new Patient("P003", "Bruno Mars",  "bruno1234"));
@@ -57,11 +64,6 @@ public class Main extends Application {
         patientMap.put("P005", new Patient("P005", "Thor Odinson",  "thor1234"));
         patientMap.put("P006", new Patient("P006", "Boris Mason",  "boris1234"));
 
-        // After Person 2 done,
-        // authMap.put("D123", new Doctor("D123", "Dr. Yu", "abcde12345", SubDepartment.RADIOLOGY));
-
-        //After Person 3 done,
-        // authMap.put("F123", new FrontDesk("F123", "David Robinson", "qwer1234"));
         authMap.put("D123", new Doctor("D123", "Dr. Yu", "abcde12345", SubDepartment.RADIOLOGY));
         authMap.put("F123", new FrontDesk("F123", "David Robinson", "qwer1234"));
     }
