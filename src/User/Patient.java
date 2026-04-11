@@ -16,8 +16,13 @@ public class Patient extends User {
     private List<Appointment> appointments; //List of appointment of such patient
     //Probably should be implemented with queue, but I suppose order doesn't matter
 
-    public Patient(String id, String name) { //Constructor for patient
-        super(id, name);
+    private String patientID;
+    private String name;
+    private String password;
+
+    public Patient(String patientID, String name, String password) {
+        super(patientID, name);  
+        this.password = password;
         this.hasConsultation = false;
         this.notification = "";
         this.appointments = new ArrayList<>();
@@ -31,6 +36,10 @@ public class Patient extends User {
     @Override
     public String getName(){ 
     	return name; 
+    }
+    
+    public String getPassword(){ 
+    	return password; 
     }
     
     public void setHasConsultation(boolean consultantion){ 
