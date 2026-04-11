@@ -15,7 +15,7 @@
             <font>
                <Font size="14.0" />
             </font></Label>
-            <Label fx:id="scanTypeLabel" style="-fx-text-fill: #e8d5f5; -fx-font-size: 13px;" text="" />
+            <Label fx:id="recommendLabel" style="-fx-text-fill: #e8d5f5; -fx-font-size: 13px;" text="" />
         </VBox>
     </top>
     <center>
