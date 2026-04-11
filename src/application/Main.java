@@ -28,11 +28,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         demo();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-        Parent root = loader.load();
-        primaryStage.setTitle("Hospital Queue Management");
-        primaryStage.setScene(new Scene(root, 640, 460));
-        primaryStage.show();
+        String[] titles = {"Login - 1", "Login - 2", "Login - 3"};
+        int[] xPos = {0, 660, 1320};
+        
+        for (int i = 0; i < 3; i++) {
+            Stage stage = (i == 0) ? primaryStage : new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            Parent root = loader.load();
+            stage.setTitle(titles[i]);
+            stage.setScene(new Scene(root, 640, 460));
+            stage.setX(xPos[i]);
+            stage.setY(100);
+            stage.show();
+        }
     }
 
     private void demo() {  
@@ -41,9 +49,9 @@ public class Main extends Application {
         departments.add(new Department("Dept_1", "A", 30, Arrays.asList(new TimeSlot("12:00 AM"), new TimeSlot("12:30 AM"), new TimeSlot("1:00 PM"))));
         departments.add(new Department("Dept_2", "B", 20, Arrays.asList(new TimeSlot("13:00 AM"), new TimeSlot("3:00 PM"))));
         departments.add(new Department("Dept_3", "C", 40,  Arrays.asList(new TimeSlot("11:30 AM"), new TimeSlot("2:00 PM"))));
-
-        patientMap.put("P001", new Patient("P001", "John Doe"));
-        patientMap.put("P002", new Patient("P002", "Jane Doe"));
+        
+        patientMap.put("P001", new Patient("P001", "John Doe",  "john1234"));
+        patientMap.put("P002", new Patient("P002", "Jane Doe",  "jane1234"));
 
         // After Person 2 done,
         // authMap.put("D123", new Doctor("D123", "Dr. Yu", "abcde12345", SubDepartment.RADIOLOGY));
