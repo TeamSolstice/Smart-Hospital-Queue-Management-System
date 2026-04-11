@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.DoctorController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <VBox spacing="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"
+          AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+
+        <Label text="Doctor Dashboard" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Label fx:id="doctorNameLabel" text="Doctor Name"/>
+
+        <Label text="Patient Queue:"/>
+        <ListView fx:id="patientListView" prefHeight="150"/>
+        <Button text="Select Patient" onAction="#handleSelectPatient"/>
+
+        <Separator/>
+
+        <Label text="Chief Complaint:"/>
+        <TextField fx:id="complaintField"/>
+
+        <Label text="Diagnosis:"/>
+        <TextField fx:id="diagnosisField"/>
+
+        <Label text="Scan Type:"/>
+        <ComboBox fx:id="scanTypeCombo" prefWidth="200"/>
+
+        <Label text="Priority:"/>
+        <ComboBox fx:id="priorityCombo" prefWidth="200"/>
+
+        <HBox spacing="10">
+            <Button text="Send to Front Desk" onAction="#handleSendToFrontDesk"/>
+            <Button text="Close Patient" onAction="#handleClosePatient"/>
+        </HBox>
+
+        <Label fx:id="statusLabel" text="" style="-fx-text-fill: green;"/>
+
+    </VBox>
+</AnchorPane>
