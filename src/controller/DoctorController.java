@@ -259,6 +259,7 @@ public class DoctorController {
             Main.scanQueue.add(new PatientEnqueued(selectedPatient, priority));
         }
 
+        Main.patientMap.remove(selectedPatient.getID()); //remove patient after consultant
         setStatus("Consultation saved for " + selectedPatient.getName() + ".");
         resetDashboardState();
     }
