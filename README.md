@@ -25,17 +25,17 @@ DEMO ACCOUNTS INFO
 
   PATIENTS
   --------
-  ID: P001  Password: john1234   (John Doe)
-  ID: P002  Password: jane1234   (Jane Doe)
-  ID: P003  Password: bruno1234  (Bruno Mars)
-  ID: P004  Password: iron1234   (Iron Man)
-  ID: P005  Password: thor1234   (Thor Odinson)
-  ID: P006  Password: boris1234  (Boris Mason)
+  - ID: P001  Password: john1234   (John Doe)
+  - ID: P002  Password: jane1234   (Jane Doe)
+  - ID: P003  Password: bruno1234  (Bruno Mars)
+  - ID: P004  Password: iron1234   (Iron Man)
+  - ID: P005  Password: thor1234   (Thor Odinson)
+  - ID: P006  Password: boris1234  (Boris Mason)
 
   STAFF
   -----
-  ID: D123  Password: abcde12345  (Dr. Yu — Doctor)
-  ID: F123  Password: qwer1234    (David Robinson — Front Desk)
+  - ID: D123  Password: abcde12345  (Dr. Yu — Doctor)
+  - ID: F123  Password: qwer1234    (David Robinson — Front Desk)
 
 ------------------------------------------------------------
 
