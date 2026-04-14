@@ -36,7 +36,8 @@ public class LoginController {
             errorLabel.setText(e.getMessage());
         }
     }
-
+    //login handler for patients
+    
     @FXML
     private void handleLogin() {
         try {
@@ -49,7 +50,8 @@ public class LoginController {
             errorLabel.setText(e.getMessage());
         }
     }
-
+    //login handler for staff
+    
     private Patient authenticatePatient(String id, String pw) throws InvalidLoginException {
         if (id.isEmpty() || pw.isEmpty())
             throw new InvalidLoginException("Please enter both Patient ID and password.");
@@ -60,6 +62,7 @@ public class LoginController {
             throw new InvalidLoginException("ID and Password does not match.");
         return patient;
     }
+    //check patientMap to verify auth
 
     private Staff authenticateStaff(String id, String pw) throws InvalidLoginException {
         if (id.isEmpty() || pw.isEmpty())
@@ -71,6 +74,7 @@ public class LoginController {
             throw new InvalidLoginException("ID and Password does not match.");
         return st;
     }
+    //check authMap to verify auth
 
     private void loadPatientDashboard(Patient patient) {
         try {
@@ -84,7 +88,8 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
+    //load PatientDashboard
+    
     private Stage getStage() {
         if (patientIdField != null && patientIdField.getScene() != null)
             return (Stage) patientIdField.getScene().getWindow();
