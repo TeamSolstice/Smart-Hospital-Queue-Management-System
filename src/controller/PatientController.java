@@ -26,17 +26,27 @@ public class PatientController {
     private List<Department> options;
     private String currentNotification;
 
-    @FXML private Label welcomeLabel;
-    @FXML private Label notificationLabel;
-    @FXML private Label appointmentStatusLabel;
-    @FXML private Button bookButton;
-    @FXML private ListView<String> departmentListView;
-    @FXML private ListView<String> appointmentListView;
+    @FXML 
+    private Label welcomeLabel;
+    @FXML 
+    private Label notificationLabel;
+    @FXML 
+    private Label appointmentStatusLabel;
+    @FXML 
+    private Button bookButton;
+    @FXML 
+    private ListView<String> departmentListView;
+    @FXML 
+    private ListView<String> appointmentListView;
 
-    @FXML private Label recommendLabel;
-    @FXML private Label confirmationLabel;
-    @FXML private Button confirmButton;
-    @FXML private ListView<String> slotListView;
+    @FXML 
+    private Label recommendLabel;
+    @FXML 
+    private Label confirmationLabel;
+    @FXML 
+    private Button confirmButton;
+    @FXML 
+    private ListView<String> slotListView;
 
 
     public void setPatient(Patient p) {
@@ -57,14 +67,27 @@ public class PatientController {
 
         if (notificationLabel != null) {
             String n = currentPatient.getNotification();
-            notificationLabel.setText(n.isEmpty() ? "There is no notifications." : "※ " + n);
+            if (n.isEmpty()) {
+                notificationLabel.setText("There is no notifications.");
+            } else {
+                notificationLabel.setText("※ " + n);
+            }
         }
 
         if (bookButton != null) {
-            bookButton.setDisable(!currentPatient.hasConsultation());
-            bookButton.setText(currentPatient.hasConsultation()
-                    ? "Book Appointment ➜"
-                    : "Appointment locked — wait for doctor's referral");
+            // Check if front desk already booked a CONFIRMED appointment
+            boolean alreadyBooked = currentPatient.getAppointments().stream().anyMatch(a -> a.getStatus() == AppointmentStatus.CONFIRMED);
+
+            if (!currentPatient.hasConsultation()) {
+                bookButton.setDisable(true);
+                bookButton.setText("Appointment locked — wait for doctor's referral");
+            } else if (alreadyBooked) {
+                bookButton.setDisable(true);
+                bookButton.setText("Appointment already booked by front desk");
+            } else {
+                bookButton.setDisable(false);
+                bookButton.setText("Book Appointment ➜");
+            }
         }
 
         loadAppointments();
@@ -93,7 +116,8 @@ public class PatientController {
         initDashboard();
         if (appointmentStatusLabel != null) appointmentStatusLabel.setText("Refreshed.");
     }
-
+    //re-init the dashboard
+    
     @FXML
     private void handleBack(ActionEvent event) {
         try {
@@ -107,7 +131,8 @@ public class PatientController {
             e.printStackTrace();
         }
     }
-
+    //handler for back button
+    
     @FXML
     private void handleBookButton() {
         String scanType = parseScanType(currentPatient.getNotification());
@@ -158,10 +183,12 @@ public class PatientController {
     public void initBooking(List<Department> dept, String notification) {
         this.options = dept;
         this.currentNotification = notification;
-
+     // Store the department list and scan type
+        
         if (recommendLabel != null)
             recommendLabel.setText("We recommend you to : " + notification);
-
+     // Display the recommended scan type at the top of the screen
+        
         if (slotListView != null) {
             ObservableList<String> items = FXCollections.observableArrayList();
             for (Department d : dept)
@@ -170,12 +197,15 @@ public class PatientController {
                         items.add(d.getLocation() + "  |  " + s.getTime() + "  |  ~" + d.getWaitTime() + " min wait");
             slotListView.setItems(items);
         }
-
+     // Loop through departments and collect only available slots into the ListView
+        
         if (confirmButton != null) confirmButton.setDisable(true);
         if (slotListView != null)
             slotListView.getSelectionModel().selectedIndexProperty().addListener(
                     (obs, oldV, newV) -> { if (confirmButton != null) confirmButton.setDisable(newV.intValue() < 0); });
+        //enable Confirm button when a slot is selected, disable if un-selected
     }
+    
     @FXML
     private void handleRefreshBooking() {
         if (options != null && currentNotification != null)
@@ -195,7 +225,7 @@ public class PatientController {
             e.printStackTrace();
         }
     }
-
+    //another back button that loads dashboard
     
     
     @FXML
@@ -203,11 +233,12 @@ public class PatientController {
         int cnt = 0;
         int i = slotListView.getSelectionModel().getSelectedIndex();
         if (i < 0 || options == null) return;
+        //get selected time slot
 
         for (Department d : options) {
             for (TimeSlot s : d.getAvailableSlots()) {
-                if (!s.isAvailable()) continue;
-                if (cnt == i) {
+                if (!s.isAvailable()) continue; //traverse only available slots
+                if (cnt == i) {					//if cnt == i, which means it finds what slots user selected, label it as confirm
                     currentPatient.bookAppointment(d, s);
                     if (confirmationLabel != null)
                         confirmationLabel.setText("Confirmed: " + s.getTime() + ", " + d.getLocation());
@@ -223,14 +254,17 @@ public class PatientController {
     @FXML
     private void handleCancelAppointment() {
         int i = appointmentListView.getSelectionModel().getSelectedIndex();
-        List<Appointment> appts = currentPatient.getAppointments();
-        appts.sort(Comparator.comparing(Appointment::getScheduledTime));
+        List<Appointment> appt_list = currentPatient.getAppointments();
+        appt_list.sort(Comparator.comparing(Appointment::getScheduledTime));
+      //sort the list
 
-        if (i < 0 || i >= appts.size()) {
+        if (i < 0 || i >= appt_list.size()) {
             if (appointmentStatusLabel != null) appointmentStatusLabel.setText("Please select an appointment.");
             return;
         }
-        Appointment appt = appts.get(i);
+        //edge case handler
+        
+        Appointment appt = appt_list.get(i);
         if (appt.getStatus() == AppointmentStatus.COMPLETED) {
             if (appointmentStatusLabel != null) appointmentStatusLabel.setText("Completed appointments cannot be cancelled.");
             return;
@@ -239,6 +273,8 @@ public class PatientController {
             if (appointmentStatusLabel != null) appointmentStatusLabel.setText("Already cancelled.");
             return;
         }
+       //check if status is either completed or already canceled
+        
         appt.setStatus(AppointmentStatus.CANCELLED);
         for (Department d : Main.departments)
             for (TimeSlot s : d.getAvailableSlots())
@@ -246,28 +282,35 @@ public class PatientController {
                     s.setAvailable(true);
         if (appointmentStatusLabel != null)
             appointmentStatusLabel.setText("Cancelled: " + appt.getScheduledTime());
+        //Canceling appointment and make time slot available
         loadAppointments();
     }
 
     @FXML
     private void handleRemoveAppointment() {
         int i = appointmentListView.getSelectionModel().getSelectedIndex();
-        List<Appointment> appts = currentPatient.getAppointments();
-        appts.sort(Comparator.comparing(Appointment::getScheduledTime));
-
-        if (i < 0 || i >= appts.size()) {
+        List<Appointment> appt_list = currentPatient.getAppointments();
+        appt_list.sort(Comparator.comparing(Appointment::getScheduledTime));
+        //sort the list
+        
+        if (i < 0 || i >= appt_list.size()) {
             if (appointmentStatusLabel != null) appointmentStatusLabel.setText("Please select an appointment.");
             return;
         }
-        Appointment appt = appts.get(i);
+        //edge case handler
+        
+        Appointment appt = appt_list.get(i);
         if (appt.getStatus() == AppointmentStatus.CONFIRMED || appt.getStatus() == AppointmentStatus.PENDING) {
             if (appointmentStatusLabel != null) appointmentStatusLabel.setText("Only completed or cancelled appointments can be removed.");
             return;
         }
-        appts.remove(i);
+        //check if status is either confirmed or pending
+        
+        appt_list.remove(i);
         if (appointmentStatusLabel != null) appointmentStatusLabel.setText("Removed.");
         loadAppointments();
-    }    
+    }   
+    //
     
     @FXML
     private void handleLogout(ActionEvent event) {
@@ -280,7 +323,8 @@ public class PatientController {
             e.printStackTrace();
         }
     }    
-
+    //Works as back button that loads login page
+    
     private String parseScanType(String notification) {
         int start = notification.indexOf("[");
         int end = notification.indexOf("]");
@@ -288,6 +332,7 @@ public class PatientController {
             return notification.substring(start + 1, end);
         return null;
     }    
+    //Parses scan type
     
     private Stage getStage(javafx.scene.Node node) {
         return (Stage) node.getScene().getWindow();
