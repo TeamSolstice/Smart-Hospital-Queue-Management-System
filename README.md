@@ -1,6 +1,5 @@
-==========================================
-  Smart Hospital Queue Management System 
-==========================================
+Smart Hospital Queue Management System 
+
 
 REQUIREMENTS
 ------------
