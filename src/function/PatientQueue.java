@@ -14,6 +14,10 @@ public class PatientQueue {
 	public void add(PatientEnqueued patient) {
 		queue.add(patient);
 	}
+
+	public PriorityQueue<PatientEnqueued> getQueue() {  //Getter added
+		return queue; 
+	}	
 	
 	public PatientEnqueued dequeue() {
 		return queue.poll();
