@@ -75,7 +75,7 @@ DEMO FLOW
   - This demonstrates PriorityQueue — Emergency always comes first regardless of submission order
 
 **Booking:**
-1. Select Bruno Mars's request → click **Book Appointment**
+ Select Bruno Mars's request → click **Book Appointment**
    - Appointment is created and added to Bruno Mars's appointment list
    - Slot is marked unavailable
    - Request is removed from the queue
