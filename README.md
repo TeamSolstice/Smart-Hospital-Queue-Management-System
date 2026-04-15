@@ -20,7 +20,7 @@
 
 ------------------------------------------------------------
 
-##DEMO ACCOUNTS INFO
+DEMO ACCOUNTS INFO
 ------------------
 
   PATIENTS
@@ -39,7 +39,7 @@
 
 ------------------------------------------------------------
 
-##DEMO FLOW
+DEMO FLOW
 ---------
 ### Step 1 — Test Login Errors
 - Leave fields empty → click Patient Login → `"Please enter both Patient ID and password."`
